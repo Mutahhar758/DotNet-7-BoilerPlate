@@ -1,6 +1,6 @@
 ﻿namespace Demo.WebApi.Application.Common.Models;
 
-public class PaginationResponse<T>
+public class PaginationResponse<T> : HttpResponseDetail
 {
     public PaginationResponse(List<T> data, int count, int page, int pageSize)
     {

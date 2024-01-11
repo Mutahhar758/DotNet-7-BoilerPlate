@@ -1,5 +1,7 @@
 using Demo.WebApi.Application.Common.Events;
 using Demo.WebApi.Application.Common.Interfaces;
+using Demo.WebApi.Domain.Preference;
+using Demo.WebApi.Domain.Public;
 using Demo.WebApi.Infrastructure.Persistence.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
@@ -13,6 +15,11 @@ public class ApplicationDbContext : BaseDbContext
     {
     }
 
+    public DbSet<City> Cities => Set<City>();
+    public DbSet<State> States => Set<State>();
+    public DbSet<Country> Countries => Set<Country>();
+
+    public DbSet<Media> Media => Set<Media>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {

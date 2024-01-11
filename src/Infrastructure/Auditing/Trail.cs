@@ -2,7 +2,7 @@ using Demo.WebApi.Domain.Common.Contracts;
 
 namespace Demo.WebApi.Infrastructure.Auditing;
 
-public class Trail : BaseEntity
+public class Trail : BaseEntity<Guid>
 {
     public Guid UserId { get; set; }
     public string? Type { get; set; }

@@ -8,6 +8,8 @@ internal static class Startup
         var env = builder.Environment;
         builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true)
+                .AddJsonFile($"{configurationsDirectory}/azurestorage.json", optional: false, reloadOnChange: true)
+                .AddJsonFile($"{configurationsDirectory}/azurestorage.{env.EnvironmentName}.json", optional: true, reloadOnChange: true)
                 .AddJsonFile($"{configurationsDirectory}/logger.json", optional: false, reloadOnChange: true)
                 .AddJsonFile($"{configurationsDirectory}/logger.{env.EnvironmentName}.json", optional: true, reloadOnChange: true)
                 .AddJsonFile($"{configurationsDirectory}/hangfire.json", optional: false, reloadOnChange: true)
