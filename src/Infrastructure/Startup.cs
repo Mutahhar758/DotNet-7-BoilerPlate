@@ -36,6 +36,7 @@ public static class Startup
         return services
             .AddApiVersioning()
             .AddAuth(config)
+            .AddAzure(config)
             .AddBackgroundJobs(config)
             .AddCaching(config)
             .AddCorsPolicy(config)
