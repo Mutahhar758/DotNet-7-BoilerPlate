@@ -6,4 +6,5 @@ internal static class SchemaNames
     public static string Auditing = nameof(Auditing).ToLower(); // "AUDITING";
     public static string Identity = nameof(Identity).ToLower(); // "IDENTITY";
     public static string Public = nameof(Public).ToLower(); // "IDENTITY";
+    public static string Preference = nameof(Preference).ToLower(); // "PREFERENCE";
 }

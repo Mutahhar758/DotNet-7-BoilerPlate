@@ -1,5 +1,4 @@
 ﻿using Demo.WebApi.Domain.Identity;
-using Demo.WebApi.Domain.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
