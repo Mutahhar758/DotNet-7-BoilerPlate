@@ -2,6 +2,8 @@ using Demo.WebApi.Infrastructure.Persistence.Context;
 using Demo.WebApi.Domain.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.DependencyInjection;
+using Demo.WebApi.Infrastructure.Middleware;
+using Microsoft.AspNetCore.Builder;
 
 namespace Demo.WebApi.Infrastructure.Identity;
 
@@ -21,4 +23,12 @@ internal static class Startup
             .AddEntityFrameworkStores<ApplicationDbContext>()
             .AddDefaultTokenProviders()
             .Services;
+
+    internal static IServiceCollection AddUserSessionMiddleware(this IServiceCollection services) =>
+        services.AddScoped<UserSessionMiddleware>();
+
+    internal static IApplicationBuilder UseUserSessionMiddleware(this IApplicationBuilder app)
+    {
+        return app.UseMiddleware<UserSessionMiddleware>();
+    }
 }
