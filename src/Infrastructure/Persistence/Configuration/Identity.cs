@@ -60,3 +60,16 @@ public class IdentityUserTokenConfig : IEntityTypeConfiguration<IdentityUserToke
         builder
             .ToTable("UserTokens", SchemaNames.Identity);
 }
+
+public class UserSessionConfig : IEntityTypeConfiguration<UserSession>
+{
+    public void Configure(EntityTypeBuilder<UserSession> builder)
+    {
+        builder
+            .ToTable("UserSession", SchemaNames.Identity);
+
+        builder.HasIndex("Token").IsUnique();
+
+        builder.HasQueryFilter(sn => sn.ExpiryDate > DateTime.UtcNow);
+    }
+}
