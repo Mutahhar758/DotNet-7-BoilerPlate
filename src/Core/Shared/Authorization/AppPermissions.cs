@@ -23,6 +23,9 @@ public static class AppResource
     public const string UserRoles = nameof(UserRoles);
     public const string Roles = nameof(Roles);
     public const string RoleClaims = nameof(RoleClaims);
+    public const string Country = nameof(Country);
+    public const string State = nameof(State);
+    public const string City = nameof(City);
 }
 
 public static class AppPermissions
