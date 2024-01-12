@@ -1,9 +1,9 @@
 using Demo.WebApi.Application.Public.Notifications;
 using Demo.WebApi.Infrastructure.Common.Extensions;
 
-namespace Demo.WebApi.Host.WebAPI.Controllers.Common;
+namespace Demo.WebApi.Host.Controllers.Common;
 
-[Authorize]
+[Authorize()]
 public class NotificationController : VersionNeutralApiController
 {
     private readonly INotificationService _notificationService;

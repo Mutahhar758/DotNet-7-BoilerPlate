@@ -1,6 +1,6 @@
 using Demo.WebApi.Application.Identity.Roles;
 
-namespace Demo.WebApi.Host.WebAPI.Controllers.Identity;
+namespace Demo.WebApi.Host.Controllers.Identity;
 
 public class RolesController : VersionNeutralApiController
 {

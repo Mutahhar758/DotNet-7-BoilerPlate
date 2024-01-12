@@ -12,6 +12,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Localization;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
+using Demo.WebApi.Application.Identity.Sessions;
+using Demo.WebApi.Application.Public.Notifications;
 
 namespace Demo.WebApi.Infrastructure.Identity;
 
@@ -21,17 +23,20 @@ internal class TokenService : ITokenService
     private readonly IStringLocalizer _t;
     private readonly SecuritySettings _securitySettings;
     private readonly JwtSettings _jwtSettings;
+    private readonly ISessionService _sessionService;
 
     public TokenService(
         UserManager<ApplicationUser> userManager,
         IOptions<JwtSettings> jwtSettings,
         IStringLocalizer<TokenService> localizer,
-        IOptions<SecuritySettings> securitySettings)
+        IOptions<SecuritySettings> securitySettings,
+        ISessionService sessionService)
     {
         _userManager = userManager;
         _t = localizer;
         _jwtSettings = jwtSettings.Value;
         _securitySettings = securitySettings.Value;
+        _sessionService = sessionService;
     }
 
     public async Task<TokenResponse> GetTokenAsync(TokenRequest request, string ipAddress, CancellationToken cancellationToken)
@@ -75,7 +80,7 @@ internal class TokenService : ITokenService
 
     private async Task<TokenResponse> GenerateTokensAndUpdateUser(ApplicationUser user, string ipAddress)
     {
-        string token = GenerateJwt(user, ipAddress);
+        string token = await GenerateJwt(user, ipAddress);
 
         user.RefreshToken = GenerateRefreshToken();
         user.RefreshTokenExpiryTime = DateTime.UtcNow.AddDays(_jwtSettings.RefreshTokenExpirationInDays);
@@ -85,8 +90,16 @@ internal class TokenService : ITokenService
         return new TokenResponse(token, user.RefreshToken, user.RefreshTokenExpiryTime);
     }
 
-    private string GenerateJwt(ApplicationUser user, string ipAddress) =>
-        GenerateEncryptedToken(GetSigningCredentials(), GetClaims(user, ipAddress));
+    private async Task<string> GenerateJwt(ApplicationUser user, string ipAddress)
+    {
+        DateTime expiry = DateTime.UtcNow.AddMinutes(_jwtSettings.TokenExpirationInMinutes);
+
+        string token = GenerateEncryptedToken(GetSigningCredentials(), GetClaims(user, ipAddress));
+
+        await _sessionService.CreateSessionAsync(token, user.Id, AppRoles.Admin, null, expiry, null, null);
+
+        return token;
+    }
 
     private IEnumerable<Claim> GetClaims(ApplicationUser user, string ipAddress) =>
         new List<Claim>
