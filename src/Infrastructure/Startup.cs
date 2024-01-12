@@ -1,5 +1,3 @@
-using System.Reflection;
-using System.Runtime.CompilerServices;
 using Demo.WebApi.Infrastructure.Auth;
 using Demo.WebApi.Infrastructure.BackgroundJobs;
 using Demo.WebApi.Infrastructure.Caching;
@@ -11,7 +9,6 @@ using Demo.WebApi.Infrastructure.Localization;
 using Demo.WebApi.Infrastructure.Mailing;
 using Demo.WebApi.Infrastructure.Mapping;
 using Demo.WebApi.Infrastructure.Middleware;
-using Demo.WebApi.Infrastructure.Notifications;
 using Demo.WebApi.Infrastructure.OpenApi;
 using Demo.WebApi.Infrastructure.Persistence;
 using Demo.WebApi.Infrastructure.Persistence.Initialization;
@@ -23,6 +20,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System.Reflection;
+using System.Runtime.CompilerServices;
+using Demo.WebApi.Shared.Services.AzureStorage;
 
 [assembly: InternalsVisibleTo("Infrastructure.Test")]
 
@@ -48,12 +48,12 @@ public static class Startup
             .AddPOLocalization(config)
             .AddMailing(config)
             .AddMediatR(Assembly.GetExecutingAssembly())
-            .AddNotifications(config)
             .AddOpenApiDocumentation(config)
             .AddPersistence()
             .AddRequestLogging(config)
             .AddRouting(options => options.LowercaseUrls = true)
-            .AddServices();
+            .AddServices()
+            .AddAzureQueues();
     }
 
     private static IServiceCollection AddApiVersioning(this IServiceCollection services) =>
@@ -97,7 +97,6 @@ public static class Startup
     {
         builder.MapControllers().RequireAuthorization();
         builder.MapHealthCheck();
-        builder.MapNotifications();
         return builder;
     }
 

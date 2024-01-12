@@ -9,7 +9,8 @@ internal static class Startup
         builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                 .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true, reloadOnChange: true)
                 .AddJsonFile($"{configurationsDirectory}/azurestorage.json", optional: false, reloadOnChange: true)
-                .AddJsonFile($"{configurationsDirectory}/azurestorage.{env.EnvironmentName}.json", optional: true, reloadOnChange: true)
+                .AddJsonFile($"{configurationsDirectory}/azurestorage.{env.EnvironmentName}.json", optional: true, reloadOnChange:
+                true)
                 .AddJsonFile($"{configurationsDirectory}/logger.json", optional: false, reloadOnChange: true)
                 .AddJsonFile($"{configurationsDirectory}/logger.{env.EnvironmentName}.json", optional: true, reloadOnChange: true)
                 .AddJsonFile($"{configurationsDirectory}/hangfire.json", optional: false, reloadOnChange: true)
@@ -28,8 +29,6 @@ internal static class Startup
                 .AddJsonFile($"{configurationsDirectory}/security.{env.EnvironmentName}.json", optional: true, reloadOnChange: true)
                 .AddJsonFile($"{configurationsDirectory}/openapi.json", optional: false, reloadOnChange: true)
                 .AddJsonFile($"{configurationsDirectory}/openapi.{env.EnvironmentName}.json", optional: true, reloadOnChange: true)
-                .AddJsonFile($"{configurationsDirectory}/signalr.json", optional: false, reloadOnChange: true)
-                .AddJsonFile($"{configurationsDirectory}/signalr.{env.EnvironmentName}.json", optional: true, reloadOnChange: true)
                 .AddJsonFile($"{configurationsDirectory}/securityheaders.json", optional: false, reloadOnChange: true)
                 .AddJsonFile($"{configurationsDirectory}/securityheaders.{env.EnvironmentName}.json", optional: true, reloadOnChange: true)
                 .AddJsonFile($"{configurationsDirectory}/localization.json", optional: false, reloadOnChange: true)

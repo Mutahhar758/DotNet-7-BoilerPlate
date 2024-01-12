@@ -1,6 +1,6 @@
 using Demo.WebApi.Application.Identity.Tokens;
 
-namespace Demo.WebApi.Host.Controllers.Identity;
+namespace Demo.WebApi.Host.WebAPI.Controllers.Identity;
 
 public sealed class TokensController : VersionNeutralApiController
 {

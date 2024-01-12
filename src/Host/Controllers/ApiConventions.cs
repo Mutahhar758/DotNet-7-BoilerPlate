@@ -1,7 +1,7 @@
 ﻿using Demo.WebApi.Infrastructure.Middleware;
 using Microsoft.AspNetCore.Mvc.ApiExplorer;
 
-namespace Demo.WebApi.Host.Controllers;
+namespace Demo.WebApi.Host.WebAPI.Controllers;
 
 #nullable disable
 #pragma warning disable RCS1163, IDE0060

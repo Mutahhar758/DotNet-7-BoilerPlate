@@ -1,13 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using YDrive.Application.Common.Enums;
-
-namespace YDrive.Application.Common.FCMNotification;
+﻿namespace Demo.WebApi.Application.Public.Notifications;
 public class FCMNotificationRequest
 {
     public bool IsSilent { get; set; } = false;

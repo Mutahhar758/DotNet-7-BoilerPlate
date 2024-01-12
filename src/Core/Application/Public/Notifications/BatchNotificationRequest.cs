@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using System.ComponentModel.DataAnnotations;
 
-namespace Demo.WebApi.Application.Notifications;
+namespace Demo.WebApi.Application.Public.Notifications;
 public class BatchNotificationRequest
 {
     public string Title { get; set; } = default!;

@@ -1,6 +1,6 @@
 using MediatR;
 
-namespace Demo.WebApi.Host.Controllers;
+namespace Demo.WebApi.Host.WebAPI.Controllers;
 
 [ApiController]
 public class BaseApiController : ControllerBase

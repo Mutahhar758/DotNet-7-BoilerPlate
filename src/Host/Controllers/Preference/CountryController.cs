@@ -2,7 +2,7 @@ using Demo.WebApi.Application.Preference.Countries;
 using Demo.WebApi.Infrastructure.Common.Extensions;
 using Microsoft.Extensions.Localization;
 
-namespace Demo.WebApi.Host.Controllers.Preference;
+namespace Demo.WebApi.Host.WebAPI.Controllers.Preference;
 
 [Authorize]
 //[MustHavePermission(AppAction.View, AppResource.Country)]

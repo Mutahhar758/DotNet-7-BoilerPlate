@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json.Serialization;
 
-namespace Demo.WebApi.Infrastructure.Common.Services;
+namespace Demo.WebApi.Shared.Services.Common.Services;
 
 public class NewtonSoftService : ISerializerService
 {

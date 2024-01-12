@@ -1,6 +1,4 @@
-﻿using YDrive.Application.Common.FCMNotification;
-
-namespace Demo.WebApi.Application.Notifications;
+﻿namespace Demo.WebApi.Application.Public.Notifications;
 public class SaveUserNotificationRequest
 {
     public int NotificationId { get; set; }

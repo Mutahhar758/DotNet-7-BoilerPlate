@@ -1,4 +1,4 @@
-﻿namespace Demo.WebApi.Host.Controllers;
+﻿namespace Demo.WebApi.Host.WebAPI.Controllers;
 
 [Route("api/[controller]")]
 [ApiVersionNeutral]

@@ -1,4 +1,6 @@
-﻿namespace Demo.WebApi.Application.Notifications;
+﻿using Demo.WebApi.Domain.Common.Enums;
+
+namespace Demo.WebApi.Application.Public.Notifications;
 public class NotificationListingResponse
 {
     public int Id { get; set; } = default!;
