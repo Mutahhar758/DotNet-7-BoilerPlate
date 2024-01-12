@@ -1,24 +1,28 @@
 using Demo.WebApi.Application.Common.Mailing;
+using Demo.WebApi.Shared.Notifications;
 using MailKit.Net.Smtp;
 using MailKit.Security;
+using Microsoft.Azure.WebJobs;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using MimeKit;
+using NotificationFunction.Models;
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace Demo.WebApi.Infrastructure.Mailing;
+namespace NotificationFunction.Functions;
 
-public class SmtpMailService : IMailService
+public class MailQueueTrigger
 {
     private readonly MailSettings _settings;
-    private readonly ILogger<SmtpMailService> _logger;
-
-    public SmtpMailService(IOptions<MailSettings> settings, ILogger<SmtpMailService> logger)
+    public MailQueueTrigger(IOptions<MailSettings> settings)
     {
         _settings = settings.Value;
-        _logger = logger;
     }
 
-    public async Task SendAsync(MailRequest request, CancellationToken cancellationToken = default)
+    [FunctionName(nameof(MailQueueTrigger))]
+    public async Task RunAsync([QueueTrigger(QueueConstants.MailQueueTrigger)] MailRequest request, ILogger logger)
     {
         try
         {
@@ -72,14 +76,14 @@ public class SmtpMailService : IMailService
             email.Body = builder.ToMessageBody();
 
             using var smtp = new SmtpClient();
-            await smtp.ConnectAsync(_settings.Host, _settings.Port, SecureSocketOptions.StartTls, cancellationToken);
-            await smtp.AuthenticateAsync(_settings.UserName, _settings.Password, cancellationToken);
-            await smtp.SendAsync(email, cancellationToken);
-            await smtp.DisconnectAsync(true, cancellationToken);
+            await smtp.ConnectAsync(_settings.Host, _settings.Port, SecureSocketOptions.StartTls);
+            await smtp.AuthenticateAsync(_settings.UserName, _settings.Password);
+            await smtp.SendAsync(email);
+            await smtp.DisconnectAsync(true);
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex, ex.Message);
+            logger.LogError(ex, ex.Message);
         }
     }
 }

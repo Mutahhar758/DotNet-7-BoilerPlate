@@ -1,5 +1,4 @@
-namespace Demo.WebApi.Infrastructure.Mailing;
-
+﻿namespace NotificationFunction.Models;
 public class MailSettings
 {
     public string? From { get; set; }

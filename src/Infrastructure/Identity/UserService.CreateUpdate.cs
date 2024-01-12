@@ -138,7 +138,9 @@ internal partial class UserService
                 new List<string> { user.Email },
                 _t["Confirm Registration"],
                 _templateService.GenerateEmailTemplate("email-confirmation", eMailModel));
-            _jobService.Enqueue(() => _mailService.SendAsync(mailRequest, CancellationToken.None));
+
+            await _mailService.SendAsync(mailRequest);
+
             messages.Add(_t[$"Please check {user.Email} to verify your account!"]);
         }
 
