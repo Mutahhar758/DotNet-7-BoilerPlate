@@ -6,6 +6,7 @@ using Demo.WebApi.Infrastructure.Caching;
 using Demo.WebApi.Infrastructure.Common;
 using Demo.WebApi.Infrastructure.Cors;
 using Demo.WebApi.Infrastructure.FileStorage;
+using Demo.WebApi.Infrastructure.Identity;
 using Demo.WebApi.Infrastructure.Localization;
 using Demo.WebApi.Infrastructure.Mailing;
 using Demo.WebApi.Infrastructure.Mapping;
@@ -38,6 +39,7 @@ public static class Startup
             .AddAuth(config)
             .AddAzure(config)
             .AddBackgroundJobs(config)
+            .AddUserSessionMiddleware()
             .AddCaching(config)
             .AddCorsPolicy(config)
             .AddExceptionMiddleware()
@@ -86,6 +88,7 @@ public static class Startup
             .UseAuthentication()
             .UseCurrentUser()
             .UseAuthorization()
+            .UseUserSessionMiddleware()
             .UseRequestLogging(config)
             .UseHangfireDashboard(config)
             .UseOpenApiDocumentation(config);
