@@ -5,9 +5,7 @@ using Demo.WebApi.Host.Controllers;
 using Demo.WebApi.Infrastructure;
 using Demo.WebApi.Infrastructure.Common;
 using Demo.WebApi.Infrastructure.Logging.Serilog;
-using FluentValidation.AspNetCore;
 using Serilog;
-using Serilog.Formatting.Compact;
 
 [assembly: ApiConventionType(typeof(ApiConventions))]
 

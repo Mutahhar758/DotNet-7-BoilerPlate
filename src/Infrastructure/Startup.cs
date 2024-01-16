@@ -1,27 +1,27 @@
-using System.Reflection;
-using System.Runtime.CompilerServices;
 using Demo.WebApi.Infrastructure.Auth;
 using Demo.WebApi.Infrastructure.BackgroundJobs;
 using Demo.WebApi.Infrastructure.Caching;
 using Demo.WebApi.Infrastructure.Common;
 using Demo.WebApi.Infrastructure.Cors;
 using Demo.WebApi.Infrastructure.FileStorage;
+using Demo.WebApi.Infrastructure.Identity;
 using Demo.WebApi.Infrastructure.Localization;
-using Demo.WebApi.Infrastructure.Mailing;
 using Demo.WebApi.Infrastructure.Mapping;
 using Demo.WebApi.Infrastructure.Middleware;
-using Demo.WebApi.Infrastructure.Notifications;
 using Demo.WebApi.Infrastructure.OpenApi;
 using Demo.WebApi.Infrastructure.Persistence;
 using Demo.WebApi.Infrastructure.Persistence.Initialization;
 using Demo.WebApi.Infrastructure.SecurityHeaders;
 using Demo.WebApi.Infrastructure.Validations;
+using Demo.WebApi.Shared.Services.AzureStorage;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using System.Reflection;
+using System.Runtime.CompilerServices;
 
 [assembly: InternalsVisibleTo("Infrastructure.Test")]
 
@@ -36,21 +36,22 @@ public static class Startup
         return services
             .AddApiVersioning()
             .AddAuth(config)
+            .AddAzure(config)
             .AddBackgroundJobs(config)
+            .AddUserSessionMiddleware()
             .AddCaching(config)
             .AddCorsPolicy(config)
             .AddExceptionMiddleware()
             .AddBehaviours(applicationAssembly)
             .AddHealthCheck()
             .AddPOLocalization(config)
-            .AddMailing(config)
             .AddMediatR(Assembly.GetExecutingAssembly())
-            .AddNotifications(config)
             .AddOpenApiDocumentation(config)
             .AddPersistence()
             .AddRequestLogging(config)
             .AddRouting(options => options.LowercaseUrls = true)
-            .AddServices();
+            .AddServices()
+            .AddAzureQueues();
     }
 
     private static IServiceCollection AddApiVersioning(this IServiceCollection services) =>
@@ -85,6 +86,7 @@ public static class Startup
             .UseAuthentication()
             .UseCurrentUser()
             .UseAuthorization()
+            .UseUserSessionMiddleware()
             .UseRequestLogging(config)
             .UseHangfireDashboard(config)
             .UseOpenApiDocumentation(config);
@@ -93,7 +95,6 @@ public static class Startup
     {
         builder.MapControllers().RequireAuthorization();
         builder.MapHealthCheck();
-        builder.MapNotifications();
         return builder;
     }
 

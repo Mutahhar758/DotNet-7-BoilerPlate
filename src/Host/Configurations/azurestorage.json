@@ -1,0 +1,11 @@
+{
+  "AzureStorageSettings": {
+    "MediaAllowedExtension": ".jpg,.png,.jpeg,.pdf",
+    "ConnectionString": "UseDevelopmentStorage=true",
+    "AzureContainerReference": "dev-storage-container",
+    "AzureBlobReference": "dev-blob-reference",
+    "AccountName": "localstorage",
+    "AccountKey": "YiykcaISRXELtU0LODfO1Ro3ly83Bo/R3xgZUBZ1vTalLy5Tt/a7bdxsVc5c7ql2/EaCkGg4bx7X+AStLWKIXg==",
+    "FileSizeLimit": 5242880
+  }
+}

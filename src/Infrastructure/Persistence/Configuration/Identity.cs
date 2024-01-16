@@ -1,5 +1,4 @@
 ﻿using Demo.WebApi.Domain.Identity;
-using Demo.WebApi.Domain.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
@@ -59,4 +58,17 @@ public class IdentityUserTokenConfig : IEntityTypeConfiguration<IdentityUserToke
     public void Configure(EntityTypeBuilder<IdentityUserToken<string>> builder) =>
         builder
             .ToTable("UserTokens", SchemaNames.Identity);
+}
+
+public class UserSessionConfig : IEntityTypeConfiguration<UserSession>
+{
+    public void Configure(EntityTypeBuilder<UserSession> builder)
+    {
+        builder
+            .ToTable("UserSession", SchemaNames.Identity);
+
+        builder.HasIndex("Token").IsUnique();
+
+        builder.HasQueryFilter(sn => sn.ExpiryDate > DateTime.UtcNow);
+    }
 }

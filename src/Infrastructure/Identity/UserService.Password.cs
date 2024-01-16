@@ -26,7 +26,8 @@ internal partial class UserService
             new List<string> { request.Email },
             _t["Reset Password"],
             _t[$"Your Password Reset Token is '{code}'. You can reset your password using the {endpointUri} Endpoint."]);
-        _jobService.Enqueue(() => _mailService.SendAsync(mailRequest, CancellationToken.None));
+
+        await _mailService.SendAsync(mailRequest);
 
         return _t["Password Reset Mail has been sent to your authorized Email."];
     }

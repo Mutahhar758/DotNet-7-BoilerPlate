@@ -3,7 +3,7 @@ using Demo.WebApi.Application.Auditing;
 using Demo.WebApi.Application.Identity.Users;
 using Demo.WebApi.Application.Identity.Users.Password;
 
-namespace Demo.WebApi.Host.Controllers.Identity;
+namespace Demo.WebApi.Host.Controllers.Personal;
 
 public class PersonalController : VersionNeutralApiController
 {

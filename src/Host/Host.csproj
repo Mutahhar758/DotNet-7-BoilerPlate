@@ -40,6 +40,8 @@
         </None>
     </ItemGroup>
     <ItemGroup>
+        <Compile Remove="Databases\**" />
+        <Content Remove="Databases\**" />
         <Content Remove="Logs\*" />
         <None Include="Logs\*" />
     </ItemGroup>
@@ -49,7 +51,8 @@
         </None>
     </ItemGroup>
     <ItemGroup>
-      <Folder Include="Databases\Host\" />
+      <EmbeddedResource Remove="Databases\**" />
+      <None Remove="Databases\**" />
     </ItemGroup>
     <ItemGroup>
       <PackageReference Update="Roslynator.Analyzers" Version="4.2.0">
