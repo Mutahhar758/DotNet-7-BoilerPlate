@@ -1,5 +1,6 @@
 using Demo.WebApi.Application.Common.Events;
 using Demo.WebApi.Application.Common.Interfaces;
+using Demo.WebApi.Domain.Identity;
 using Demo.WebApi.Infrastructure.Persistence.Configuration;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
@@ -13,6 +14,7 @@ public class ApplicationDbContext : BaseDbContext
     {
     }
 
+    public DbSet<UserSession> UserSessions => Set<UserSession>();
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
