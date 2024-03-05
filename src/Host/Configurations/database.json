@@ -1,6 +1,6 @@
 {
   "DatabaseSettings": {
-    "DBProvider": "postgresql",
-    "ConnectionString": "Host=localhost;Port=5432;Database=BoilerPlate;Username=postgres;Password=postgres;Include Error Detail=true"
+    "DBProvider": "mssql",
+    "ConnectionString": "Server=(local);Database=demo;Integrated Security=True;TrustServerCertificate=True;"
   }
 }

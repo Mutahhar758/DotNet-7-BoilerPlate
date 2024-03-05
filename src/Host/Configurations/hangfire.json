@@ -20,8 +20,8 @@
       "WorkerCount": 5
     },
     "Storage": {
-      "StorageProvider": "postgresql",
-      "ConnectionString": "Host=localhost;Port=5432;Database=BoilerPlate;Username=postgres;Password=postgres;Include Error Detail=true",
+      "StorageProvider": "mssql",
+      "ConnectionString": "Server=(local);Database=demo;Integrated Security=True;TrustServerCertificate=True;",
       "Options": {
         "CommandBatchMaxTimeout": "00:05:00",
         "QueuePollInterval": "00:00:01",
